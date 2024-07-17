@@ -241,6 +241,26 @@
     return div
     }
     ,{"className": "foliumpopup"});
-                     
+
+    // Set the map to the device location
+    map_5641aa399d807a8529f65e0fed8a7378.locate({setView: true, maxZoom: 16});
+
+    // handle the found location
+    function onLocationFound(e) {
+        var radius = e.accuracy;
+
+        L.marker(e.latlng).addTo(map_5641aa399d807a8529f65e0fed8a7378)
+            .bindPopup("Your approximate location").openPopup();
+
+        L.circle(e.latlng, radius).addTo(map_5641aa399d807a8529f65e0fed8a7378);
+    }
+
+    map_5641aa399d807a8529f65e0fed8a7378.on('locationfound', onLocationFound);
+
+    function onLocationError(e) {
+        alert(e.message + "\nPlease refresh the page and allow location for full map functionality!");
+    }   
+
+    map_5641aa399d807a8529f65e0fed8a7378.on('locationerror', onLocationError);        
 </script>
 </html>
